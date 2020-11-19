@@ -29,7 +29,12 @@
 <ol>
   {#each Object.entries($items) as [id, md] (id)}
     <li>
-      <pre contenteditable="true">{md}</pre>
+      <pre
+        contenteditable="true"
+        on:input={(ev) => items.set(produce($items, (items) => {
+              console.log(ev.currentTarget, ev.currentTarget.innerText);
+              items[id] = ev.currentTarget.innerText;
+            }))}>{md}</pre>
     </li>
   {/each}
 </ol>

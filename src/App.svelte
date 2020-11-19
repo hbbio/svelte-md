@@ -1,9 +1,9 @@
 <script>
-  import TurndownService from "turndown";
+  import Turndown from "turndown";
   import produce from "immer";
   import { writable } from "svelte/store";
 
-  let td = new TurndownService();
+  let td = new Turndown();
 
   import EditRich from "./EditRich.svelte";
   import EditMark from "./EditMark.svelte";
@@ -13,6 +13,7 @@
     c: "**Today**",
     d: "See `ya`",
   });
+  $: console.log($items);
 
   const debouncer = (delay = 750) => {
     let timer;
@@ -25,16 +26,19 @@
   };
   const debounce = debouncer(20);
 
-  const updateItem = (id, md) =>
+  const updateItem = (id, md) => {
     // debounce(
     //   () =>
+    console.log("updating", id, md);
     items.set(
+      // NOT OK { ...$items, id: md }
       produce($items, (items) => {
         items[id] = md;
       })
     );
-  //   {}
-  // );
+    //   {}
+    // );
+  };
 </script>
 
 {#each Object.entries($items) as [id, md] (id)}

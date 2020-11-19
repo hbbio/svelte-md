@@ -15,16 +15,16 @@
   });
   $: console.log($items);
 
-  const debouncer = (delay = 750) => {
-    let timer;
-    return (cb, v) => {
-      clearTimeout(timer);
-      timer = window.setTimeout(() => {
-        cb(v);
-      }, delay);
-    };
-  };
-  const debounce = debouncer(20);
+  // const debouncer = (delay = 750) => {
+  //   let timer;
+  //   return (cb, v) => {
+  //     clearTimeout(timer);
+  //     timer = window.setTimeout(() => {
+  //       cb(v);
+  //     }, delay);
+  //   };
+  // };
+  // const debounce = debouncer(20);
 
   const updateItem = (id, md) => {
     // debounce(

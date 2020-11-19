@@ -4,7 +4,17 @@
   import marked from "marked";
   import Hoverable from "./Hoverable.svelte";
 
+  /**
+   * turndown service
+   */
+  export let td;
+  /**
+   * editor id
+   */
   export let id;
+  /**
+   * markdown content
+   */
   export let md;
   let html;
   onMount(() => {
@@ -40,6 +50,6 @@
     <div
       contenteditable="true"
       bind:innerHTML={html}
-      on:input={() => dispatch('input', html)} />
+      on:input={() => dispatch('input', td.turndown(html))} />
   </div>
 </Hoverable>

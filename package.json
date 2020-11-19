@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/marked": "^1.2.0",
     "@types/turndown": "^5.0.0",
+    "immer": "^8.0.0",
     "marked": "^1.2.5",
     "sirv-cli": "^1.0.0",
     "turndown": "^7.0.0"

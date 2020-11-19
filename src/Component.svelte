@@ -4,11 +4,12 @@
   import marked from "marked";
   import Hoverable from "./Hoverable.svelte";
 
-  export let item;
+  export let id;
+  export let md;
   let html;
   onMount(() => {
-    console.log("mounting", item);
-    html = marked(item.md);
+    console.log("mounting", id);
+    html = marked(md);
   });
 </script>
 

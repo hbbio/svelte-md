@@ -1,28 +1,35 @@
 <script>
   import TurndownService from "turndown";
+  import produce from "immer";
+  import { writable } from "svelte/store";
+
   let td = new TurndownService();
 
   import Component from "./Component.svelte";
-  let items = [
-    { id: 1, md: "# Hello" },
-    { id: 2, md: "How do you do?" },
-    { id: 3, md: "**Today**" },
-    { id: 4, md: "See `ya`" },
-  ];
+  const items = writable({
+    a: "# Hello",
+    b: "How do you do?",
+    c: "**Today**",
+    d: "See `ya`",
+  });
 </script>
 
-{#each items as item (item.id)}
+{#each Object.entries($items) as [id, md] (id)}
   <Component
-    {item}
-    on:input={(ev) => (items = [...items.map((x) =>
+    {id}
+    {md}
+    on:input={(ev) => items.set(produce($items, (items) => {
+          items[id] = td.turndown(ev.detail);
+        }))} />
+  <!-- [...items.map((x) =>
           x.id === item.id ? { id: item.id, md: td.turndown(ev.detail) } : x
-        )])} />
+        )] -->
 {/each}
 
 <ol>
-  {#each items as item (item.id)}
+  {#each Object.entries($items) as [id, md] (id)}
     <li>
-      <pre>{item.md}</pre>
+      <pre contenteditable="true">{md}</pre>
     </li>
   {/each}
 </ol>

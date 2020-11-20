@@ -8,18 +8,18 @@
   import EditMark from "./EditMark.svelte";
 
   const id = "test";
-  const items = writable(`# Hello
+  const md = writable(`# Hello
 
    How do you do?
 
    **Today**
    
    See \`ya\``);
-  $: console.log($items);
+  $: console.log($md);
 
-  const updateItem = (id, md) => {
-    console.log("updating", id, md);
-    items.set(md);
+  const updateItem = (id, content) => {
+    console.log("updating", id, content);
+    md.set(content);
   };
 </script>
 
@@ -52,22 +52,19 @@
 
 <div class="wrapper">
   <div class="box1">
-    <EditRich
-      {id}
-      md={$items}
-      {td}
-      on:input={(ev) => updateItem(id, ev.detail)} />
+    <EditRich {id} md={$md} {td} on:input={(ev) => updateItem(id, ev.detail)} />
+    <button on:click={() => md.update((i) => i + '\n\n# Title\n\n')}>Add Section</button>
   </div>
 
   <div class="box2">
     <ol>
-      <EditMark {id} md={$items} on:input={(ev) => updateItem(id, ev.detail)} />
+      <EditMark {id} md={$md} on:input={(ev) => updateItem(id, ev.detail)} />
     </ol>
   </div>
 
   <div class="box3">
     <ol>
-      <EditMark {id} md={$items} on:input={(ev) => updateItem(id, ev.detail)} />
+      <EditMark {id} md={$md} on:input={(ev) => updateItem(id, ev.detail)} />
     </ol>
   </div>
 </div>

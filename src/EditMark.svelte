@@ -4,6 +4,12 @@
   export let id;
   export let md;
   let text;
+  // let elt;
+  // // using:
+  // //  bind:this={elt}
+  // // and:
+  // //  elt.innerText
+  // // instead of text does not work.
 </script>
 
 <li>

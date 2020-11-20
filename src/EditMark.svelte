@@ -11,5 +11,5 @@
   <pre
     contenteditable="true"
     bind:textContent={text}
-    on:keyup={(ev) => dispatch('input', text)}>{md}</pre>
+    on:input={(ev) => dispatch('input', text)}>{md}</pre>
 </li>

@@ -2,7 +2,6 @@
   import { onMount, createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   import marked from "marked";
-  import Hoverable from "./Hoverable.svelte";
 
   /**
    * turndown service
@@ -32,24 +31,20 @@
   }
 </style>
 
-<Hoverable let:hovering={hover}>
-  <div class="component">
-    {#if hover}
-      <button on:click={() => document.execCommand('formatBlock', false, 'h1')}>
-        h1
-      </button>
-      <button on:click={() => document.execCommand('formatBlock', false, 'h2')}>
-        h2
-      </button>
-      <button on:click={() => document.execCommand('formatBlock', false, 'p')}>
-        p
-      </button>
-      <button on:click={() => document.execCommand('bold')}> b </button>
-      <button on:click={() => document.execCommand('italic')}> i </button>
-    {/if}
-    <div
-      contenteditable="true"
-      bind:innerHTML={html}
-      on:input={() => dispatch('input', td.turndown(html))} />
-  </div>
-</Hoverable>
+<div class="component">
+  <button on:click={() => document.execCommand('formatBlock', false, 'h1')}>
+    h1
+  </button>
+  <button on:click={() => document.execCommand('formatBlock', false, 'h2')}>
+    h2
+  </button>
+  <button on:click={() => document.execCommand('formatBlock', false, 'p')}>
+    p
+  </button>
+  <button on:click={() => document.execCommand('bold')}> b </button>
+  <button on:click={() => document.execCommand('italic')}> i </button>
+  <div
+    contenteditable="true"
+    bind:innerHTML={html}
+    on:input={() => dispatch('input', td.turndown(html))} />
+</div>
